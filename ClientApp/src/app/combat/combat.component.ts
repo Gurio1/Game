@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { CombatService } from '../combat.service';
 import { Monster } from '../../models/Monster';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-combat',
@@ -11,6 +12,7 @@ import { Monster } from '../../models/Monster';
 })
 export class CombatComponent {
   public monster!: Monster;
+  healthPercentage: number = 100;
 
   constructor(
     public combatService: CombatService
@@ -19,10 +21,15 @@ export class CombatComponent {
   ngOnInit() {
     this.combatService.getMonster().subscribe((monster) => {
       this.monster = monster;
+      this.updateHealthPercentage();
     });
   }
 
   async attack(){
     this.combatService.Attack();
+  }
+
+  updateHealthPercentage(): void {
+    this.healthPercentage = (Number(this.monster.currentHp) / Number(this.monster.maxHp)) * 100;
   }
 }

@@ -9,7 +9,7 @@ import { Monster } from '../models/Monster';
 export class CombatService {
 
   private hubConnection: signalR.HubConnection;
-  monster = new BehaviorSubject<Monster>(new Monster('0','0','0'));
+  monster = new BehaviorSubject<Monster>(new Monster('0','0','0','0'));
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()

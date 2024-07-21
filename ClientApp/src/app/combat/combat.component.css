@@ -1,0 +1,18 @@
+.health-bar-container {
+  width: 100%;
+  background-color: #ddd;
+  border: 1px solid #000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.health-bar {
+  height: 30px;
+  background-color: #4caf50;
+  transition: width 0.5s;
+}
+
+.health-info {
+  margin-top: 5px;
+  font-size: 16px;
+}

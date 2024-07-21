@@ -1,8 +1,11 @@
-@if (monster.hp != '0') {
+@if (monster.maxHp != '0') {
 <div>
-  <p aria-live="polite">
-    Monster HP: <strong>{{ monster.hp }}</strong>
-  </p>
+  <div class="health-bar-container">
+    <div class="health-bar" [style.width.%]="healthPercentage"></div>
+  </div>
+  <div class="health-info">
+    Monster health: {{ monster.currentHp }} / {{ monster.maxHp }}
+  </div>
   <p aria-live="polite">
     Monster Attack: <strong>{{ monster.damage }}</strong>
   </p>
