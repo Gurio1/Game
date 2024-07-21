@@ -1,7 +1,7 @@
-using Game.Models;
+using Game.Web.Models;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Game.Hubs;
+namespace Game.Web.Hubs;
 
 public class CombatHub(CombatService combatService) : Hub
 {

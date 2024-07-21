@@ -1,4 +1,4 @@
-namespace Game.Models;
+namespace Game.Web.Models;
 
 public class Character
 {
@@ -8,6 +8,6 @@ public class Character
 
     public void Attack(Monster? monster)
     {
-        monster.HP -= Damage = monster.Defence;
+        monster.CurrentHp -= Damage = monster.Defence;
     }
 }

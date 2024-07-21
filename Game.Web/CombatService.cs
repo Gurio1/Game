@@ -1,8 +1,8 @@
 using System.Text.Json;
-using Game.Models;
+using Game.Web.Models;
 using Microsoft.Extensions.Caching.Distributed;
 
-namespace Game;
+namespace Game.Web;
 
 public class CombatService(IDistributedCache cache,ILogger<CombatService> logger)
 {
@@ -10,7 +10,9 @@ public class CombatService(IDistributedCache cache,ILogger<CombatService> logger
 
     public async Task<Monster> CreateBattle()
     {
-        var monster =  new Monster(){HP = _rnd.Next(50,200),Damage = _rnd.Next(5,25),Defence = _rnd.Next(0,10)};
+        var hp = _rnd.Next(50, 200);
+        
+        var monster =  new Monster(){MaxHp = hp,CurrentHp = hp,Damage = _rnd.Next(5,25),Defence = _rnd.Next(0,10)};
 
         var battleId = "1";
         
