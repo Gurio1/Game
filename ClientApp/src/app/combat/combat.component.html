@@ -1,0 +1,13 @@
+@if (monster.hp != '0') {
+<div>
+  <p aria-live="polite">
+    Monster HP: <strong>{{ monster.hp }}</strong>
+  </p>
+  <p aria-live="polite">
+    Monster Attack: <strong>{{ monster.damage }}</strong>
+  </p>
+  <button (click)="attack()">Attack</button>
+</div>
+} @else {
+<p>Loading...</p>
+}
