@@ -1,0 +1,40 @@
+<div class="background-overlay"></div>
+<div class="container">
+  <h1>Dark Dungeon RPG Registration</h1>
+  <form>
+    <div class="form-group">
+      <label for="username">Adventurer Name:</label>
+      <input type="text" id="username" name="username" required />
+    </div>
+    <div class="form-group">
+      <label for="email">Contact Scroll (Email):</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Secret Word (Password):</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+    <div class="form-group">
+      <label for="class">Class:</label>
+      <select id="class" name="class" required>
+        <option value="warrior">Warrior</option>
+        <option value="mage">Mage</option>
+        <option value="rogue">Rogue</option>
+        <option value="cleric">Cleric</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="race">Race:</label>
+      <select id="race" name="race" required>
+        <option value="human">Human</option>
+        <option value="elf">Elf</option>
+        <option value="dwarf">Dwarf</option>
+        <option value="orc">Orc</option>
+      </select>
+    </div>
+    <button type="submit">Join the Quest</button>
+  </form>
+  <div class="link-container">
+    <a routerLink="/login">Already have an account? Return to the Realm</a>
+  </div>
+</div>
