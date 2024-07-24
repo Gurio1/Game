@@ -1,41 +1,58 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FormGroup,FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup,FormControl, ReactiveFormsModule,Validators, NgModel } from '@angular/forms';
 import { IdentityService } from '../../services/identity.service';
 import { registerUser } from '../../contracts/registerUser';
-
+import { UniqueEmailValidator } from './validation/uniqueEmailValidator';
+import { passwordMatchValidator } from './validation/passwordMatchValidator';
+import { NgIf } from '@angular/common';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [RouterLink,ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule,NgIf,MatProgressBarModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
 export class RegistrationComponent {
+  email: string = '';
 
-constructor(private identityService : IdentityService){}
+constructor(private identityService : IdentityService,private uniqueEmailValidator : UniqueEmailValidator,){}
 
   registerForm = new FormGroup({
-    userName: new FormControl(),
-    email: new FormControl(),
-    password: new FormControl(),
-    confirmPassword: new FormControl()
-  });
+    userName: new FormControl('',Validators.pattern(/^[a-zA-Z0-9]*$/)),
+    email: new FormControl('',{
+      asyncValidators:[
+        this.uniqueEmailValidator.validate.bind(this.uniqueEmailValidator)
+      ],
+      validators:[
+        Validators.required,
+        Validators.email
+      ],
+      updateOn: 'blur'
+    }),
+    password: new FormControl('',[Validators.required,Validators.minLength(8)]),
+    confirmPassword: new FormControl('',Validators.required)
+  },{ validators: passwordMatchValidator() });
 
   submitForm() {
-    let user = new registerUser(
-      this.registerForm.controls.userName.value,
-      this.registerForm.controls.email.value,
-      this.registerForm.controls.password.value,
-      this.registerForm.controls.confirmPassword.value,
-    )
+      if(this.registerForm.valid){
+        let formControls = this.registerForm.controls;
 
-    var result = this.identityService.registerUser(user);
+        let user = new registerUser(
+        formControls.userName.value!,
+        formControls.email.value!,
+        formControls.password.value!,
+        formControls.confirmPassword.value!
+       )
 
-    console.log(user);
+        var result = this.identityService.registerUser(user);
 
-    result.subscribe(val =>{
-      console.log(val);
-    });
+        console.log(user);
+
+        result.subscribe(val =>{
+        console.log(val);
+        });
+      }
   }
 }
