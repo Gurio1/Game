@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FormGroup,FormControl, ReactiveFormsModule,Validators, NgModel } from '@angular/forms';
-import { IdentityService } from '../../services/identity.service';
-import { registerUser } from '../../contracts/registerUser';
-import { UniqueEmailValidator } from './validation/uniqueEmailValidator';
-import { passwordMatchValidator } from './validation/passwordMatchValidator';
+import { FormGroup,FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
+import { IdentityService } from '../../../services/identity.service';
+import { registerUser } from '../../../contracts/registerUser';
+import { UniqueEmailValidator } from '../shared/validators/uniqueEmailValidator';
+import { passwordMatchValidator } from './validators/passwordMatchValidator';
 import { NgIf } from '@angular/common';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { passwordValidator } from './validation/passwordValidator';
+import { passwordValidator } from '../shared/validators/passwordValidator';
 @Component({
   selector: 'app-registration',
   standalone: true,
