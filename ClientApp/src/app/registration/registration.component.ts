@@ -7,6 +7,7 @@ import { UniqueEmailValidator } from './validation/uniqueEmailValidator';
 import { passwordMatchValidator } from './validation/passwordMatchValidator';
 import { NgIf } from '@angular/common';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { passwordValidator } from './validation/passwordValidator';
 @Component({
   selector: 'app-registration',
   standalone: true,
@@ -31,7 +32,7 @@ constructor(private identityService : IdentityService,private uniqueEmailValidat
       ],
       updateOn: 'blur'
     }),
-    password: new FormControl('',[Validators.required,Validators.minLength(8)]),
+    password: new FormControl('',[Validators.required,Validators.minLength(8),passwordValidator()]),
     confirmPassword: new FormControl('',Validators.required)
   },{ validators: passwordMatchValidator() });
 

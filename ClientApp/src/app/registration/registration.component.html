@@ -76,13 +76,20 @@
           class="text-danger"
           *ngIf="registerForm.get('password')?.hasError('required')"
         >
-          Password is required
+          Password is required<br />
         </small>
         <small
           class="text-danger"
           *ngIf="registerForm.get('password')?.hasError('minlength')"
         >
-          Password length must not be less than 8 symbols
+          Password length must not be less than 8 symbols<br />
+        </small>
+        <small
+          class="text-danger"
+          *ngIf="registerForm.get('password')?.hasError('invalidPassword')"
+        >
+          Password should contain at least 1 special character and 1 numeric
+          value
         </small>
       </div>
     </div>
