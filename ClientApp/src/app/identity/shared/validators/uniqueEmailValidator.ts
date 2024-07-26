@@ -9,7 +9,7 @@ export class UniqueEmailValidator implements AsyncValidator {
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
     return this.identityService.isEmailTaken(control.value).pipe(
-      map((isTaken) => (isTaken ? { uniqueEmail: true } : null)),
+      map((isUnique) => (isUnique ? { uniqueEmail: true } : null )),
 
       //TO DO: Handle error
       catchError(() => of({ uniqueEmail: true })),

@@ -2,7 +2,7 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Identity;
 
-namespace Game.Users.Endpoints.Login;
+namespace Game.Users.Endpoints;
 
 public class Login(UserManager<ApplicationUser> userManager) : Endpoint<LoginRequest>
 {

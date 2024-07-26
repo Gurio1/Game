@@ -1,7 +1,6 @@
 import { Component, SimpleChanges } from '@angular/core';
 import { CombatService } from '../combat.service';
 import { Monster } from '../../models/Monster';
-import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-combat',

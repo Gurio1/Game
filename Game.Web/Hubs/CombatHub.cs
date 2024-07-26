@@ -13,7 +13,7 @@ public class CombatHub(CombatService combatService) : Hub
         await base.OnConnectedAsync();
     }
 
-    public async Task Attack(string data)
+    public async Task Attack()
     {
         var monster = await combatService.AttackMonster("1", _character);
         

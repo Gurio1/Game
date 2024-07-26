@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Monster } from '../models/Monster';
+import { API_URL } from '../constants'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CombatService {
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:7067/combatHub').withAutomaticReconnect()
+      .withUrl(API_URL + 'combatHub').withAutomaticReconnect()
       .build();
 
     this.hubConnection

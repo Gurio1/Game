@@ -22,7 +22,7 @@ export class IdentityService {
   }
 
   isEmailTaken(email:string) : Observable<boolean>{
-    return this.http.get<boolean>(API_URL + `users`)
+    return this.http.post<boolean>(API_URL + `users/check-email`,{"Email":email})
   }
 
   isUserNameTaken(userName: string) : Observable<boolean>{
