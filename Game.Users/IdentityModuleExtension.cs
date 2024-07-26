@@ -1,4 +1,5 @@
 using Game.Users.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,12 @@ public static class IdentityModuleExtension
 
         services.AddIdentityCore<ApplicationUser>()
             .AddEntityFrameworkStores<IdentityDbContext>();
+
+        services.Configure<IdentityOptions>(options =>
+        {
+            options.Password.RequireUppercase = false;
+            options.Password.RequireLowercase = false;
+        });
         
         logger.Information("{Module} module services registered", "Users");
 
