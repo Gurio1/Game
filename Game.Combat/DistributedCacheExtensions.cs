@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Caching.Distributed;
 
-namespace Game.Web;
+namespace Game.Combat;
 
 public static class DistributedCacheExtensions
 {
