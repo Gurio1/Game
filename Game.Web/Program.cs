@@ -2,9 +2,10 @@ using System.Reflection;
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
+using Game.Combat;
+using Game.Combat.Hubs;
+using Game.Monsters;
 using Game.Users;
-using Game.Web;
-using Game.Web.Hubs;
 using Serilog;
 
 var logger = Log.Logger = new LoggerConfiguration()
@@ -30,6 +31,12 @@ builder.Services.AddFastEndpoints()
 // Add Module Services
 List<Assembly> mediatRAssemblies = [typeof(Program).Assembly];
 builder.Services.AddIdentityModuleServices(builder.Configuration, logger, mediatRAssemblies);
+builder.Services.AddCombatModuleServices(builder.Configuration, logger, mediatRAssemblies);
+builder.Services.AddMonstersModuleServices(builder.Configuration, logger, mediatRAssemblies);
+
+// Set up MediatR
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssemblies(mediatRAssemblies.ToArray()));
 
 builder.Services.AddSignalR();
 builder.Services.AddCors(options =>
@@ -56,9 +63,6 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddSwaggerGen();
 
-
-builder.Services.AddScoped<CombatService>();
-
 var app = builder.Build();
 
 app.UseAuthentication()
@@ -77,6 +81,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowSpecificOrigin");
+
 app.MapHub<CombatHub>("/combatHub").RequireCors("AllowSpecificOrigin");
 
 app.Run();

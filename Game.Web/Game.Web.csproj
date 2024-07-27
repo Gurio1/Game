@@ -10,7 +10,7 @@
         <PackageReference Include="FastEndpoints" Version="5.27.0" />
         <PackageReference Include="FastEndpoints.Security" Version="5.27.0" />
         <PackageReference Include="FastEndpoints.Swagger" Version="5.27.0" />
-        <PackageReference Include="MediatR" Version="12.3.0" />
+        <PackageReference Include="MediatR" Version="12.4.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.6"/>
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="8.0.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
@@ -23,6 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Game.Combat\Game.Combat.csproj" />
+      <ProjectReference Include="..\Game.Monsters\Game.Monsters.csproj" />
+      <ProjectReference Include="..\Game.Players\Game.Players.csproj" />
       <ProjectReference Include="..\Game.Users\Game.Users.csproj" />
     </ItemGroup>
 
