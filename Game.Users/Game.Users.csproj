@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FastEndpoints" Version="5.27.0" />
+      <PackageReference Include="FastEndpoints.Security" Version="5.27.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+      <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Endpoints\CreateRequest.cs">
+        <DependentUpon>Create.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Endpoints\CreateRequestValidator.cs">
+        <DependentUpon>Create.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Endpoints\LoginRequest.cs">
+        <DependentUpon>Login.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Endpoints\LoginRequestValidator.cs">
+        <DependentUpon>Login.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Endpoints\IsEmailUniqueRequest.cs">
+        <DependentUpon>IsEmailUnique.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Endpoints\IsEmailUniqueRequestValidator.cs">
+        <DependentUpon>IsEmailUnique.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>
