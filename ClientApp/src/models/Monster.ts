@@ -1,5 +1,5 @@
 export class Monster{
-  constructor(public maxHp:string,public currentHp:string,public damage : string,public defence:string) {
+  constructor(public hp:string,public currentHp:string,public damage : string,public defence:string) {
 
   }
 

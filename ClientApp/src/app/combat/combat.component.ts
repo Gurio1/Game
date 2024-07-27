@@ -29,6 +29,6 @@ export class CombatComponent {
   }
 
   updateHealthPercentage(): void {
-    this.healthPercentage = (Number(this.monster.currentHp) / Number(this.monster.maxHp)) * 100;
+    this.healthPercentage = (Number(this.monster.currentHp) / Number(this.monster.hp)) * 100;
   }
 }
