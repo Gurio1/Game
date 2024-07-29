@@ -7,8 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Ardalis.Result" Version="9.1.0" />
       <PackageReference Include="FastEndpoints" Version="5.27.0" />
       <PackageReference Include="FastEndpoints.Security" Version="5.27.0" />
+      <PackageReference Include="MediatR" Version="12.4.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
@@ -34,6 +36,10 @@
       <Compile Update="Endpoints\IsEmailUniqueRequestValidator.cs">
         <DependentUpon>IsEmailUnique.cs</DependentUpon>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Game.Users.Contracts\Game.Users.Contracts.csproj" />
     </ItemGroup>
 
 </Project>
