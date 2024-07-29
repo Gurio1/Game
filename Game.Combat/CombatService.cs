@@ -8,7 +8,7 @@ namespace Game.Combat;
 
 public class CombatService(IDistributedCache cache,ILogger<CombatService> logger,IMediator mediator)
 {
-    public async Task<CreateMonsterResponse> CreateBattle()
+    public async Task<Battle> CreateBattle()
     {
         var query = new GetMonsterQuery();
 
@@ -16,13 +16,13 @@ public class CombatService(IDistributedCache cache,ILogger<CombatService> logger
 
         var monsterData = result.Value;
         
-        var battleId = "1";
-        
         logger.LogInformation("Creating battle");
 
-        await cache.SetAsync(battleId, monsterData);
+        var battle = new Battle(new Monster(monsterData.Strength,monsterData.Endurance,monsterData.Hp));
 
-        return monsterData;
+        await cache.SetAsync(battle.Id,battle);
+
+        return battle;
     }
 
     /*public async Task<Monster?> AttackMonster(string battleId,Character player)
