@@ -2,6 +2,7 @@ using System.Reflection;
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
+using Game.Characters;
 using Game.Combat;
 using Game.Combat.Hubs;
 using Game.Monsters;
@@ -33,6 +34,7 @@ List<Assembly> mediatRAssemblies = [typeof(Program).Assembly];
 builder.Services.AddIdentityModuleServices(builder.Configuration, logger, mediatRAssemblies);
 builder.Services.AddCombatModuleServices(builder.Configuration, logger, mediatRAssemblies);
 builder.Services.AddMonstersModuleServices(builder.Configuration, logger, mediatRAssemblies);
+builder.Services.AddPlayersModuleServices(builder.Configuration, logger, mediatRAssemblies);
 
 // Set up MediatR
 builder.Services.AddMediatR(cfg =>
@@ -82,6 +84,6 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowSpecificOrigin");
 
-app.MapHub<CombatHub>("/combatHub").RequireCors("AllowSpecificOrigin");
+app.MapHub<CombatHub>("/combatHub");
 
 app.Run();
