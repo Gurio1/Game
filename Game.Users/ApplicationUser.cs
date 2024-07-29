@@ -4,5 +4,5 @@ namespace Game.Users;
 
 public class ApplicationUser : IdentityUser
 {
-    public Guid CharacterId { get; set; }
+    public Guid PlayerId { get; set; }
 }
