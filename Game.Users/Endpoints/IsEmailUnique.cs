@@ -15,7 +15,7 @@ public class IsEmailUnique(UserManager<ApplicationUser> userManager) : Endpoint<
     
     public override async Task HandleAsync(IsEmailUniqueRequest req, CancellationToken ct)
     {
-        var isUnique = await userManager.Users.AnyAsync(u => u.Email == req.Email, cancellationToken: ct);
+        var isUnique = await userManager.Users.AnyAsync(u => u.Email != req.Email, cancellationToken: ct);
         
         await SendOkAsync(isUnique, ct);
     }
