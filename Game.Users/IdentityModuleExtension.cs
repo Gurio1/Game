@@ -30,6 +30,9 @@ public static class IdentityModuleExtension
             options.Password.RequireLowercase = false;
         });
         
+        // if using MediatR in this module, add any assemblies that contain handlers to the list
+        mediatRAssemblies.Add(typeof(IdentityModuleExtension).Assembly);
+        
         logger.Information("{Module} module services registered", "Users");
 
         return services;
