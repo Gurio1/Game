@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Game.Users.Endpoints;
 
-public partial class CreateRequestValidator : Validator<CreateRequest>
+public class CreateRequestValidator : AbstractValidator<CreateRequest>
 {
     public CreateRequestValidator(UserManager<ApplicationUser> userManager)
     {
@@ -28,18 +28,7 @@ public partial class CreateRequestValidator : Validator<CreateRequest>
             .WithMessage("Password required")
             .Equal(x => x.ConfirmedPassword)
             .WithMessage("Password and Confirmed password should be equal")
-            .Must(BeValidPassword)
-            .WithMessage(
-                "Password should contain at least 1 special character and 1 numeric value");
+            .Matches(@"\d").WithMessage("Password must contain at least one number.")
+            .Matches(@"[!@#$%^&*()_+\[\]{}:;<>,.?/~\\-]").WithMessage("Password must contain at least one special symbol.");
     }
-
-    private bool BeValidPassword(string password)
-    {
-        return SpecialSymbols().IsMatch(password) && Numbers().IsMatch(password); ;
-    }
-
-    [GeneratedRegex(@"\d")]
-    private static partial Regex Numbers();
-    [GeneratedRegex(@"[!@#$%^&*()_+{}\[\]:;<>,.?/~\-]")]
-    private static partial Regex SpecialSymbols();
 }

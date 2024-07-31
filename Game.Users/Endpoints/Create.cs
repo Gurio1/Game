@@ -1,9 +1,10 @@
 using FastEndpoints;
+using FastEndpoints.Security;
 using Microsoft.AspNetCore.Identity;
 
 namespace Game.Users.Endpoints;
 
-internal class Create(UserManager<ApplicationUser> userManager) : Endpoint<CreateRequest>
+public class Create(UserManager<ApplicationUser> userManager) : Endpoint<CreateRequest>
 {
     public override void Configure()
     {
@@ -15,7 +16,6 @@ internal class Create(UserManager<ApplicationUser> userManager) : Endpoint<Creat
     {
         var newUser = new ApplicationUser()
         {
-            UserName = req.UserName,
             Email = req.Email,
         };
 
@@ -29,7 +29,14 @@ internal class Create(UserManager<ApplicationUser> userManager) : Endpoint<Creat
             }
             ThrowIfAnyErrors();
         }
+        
+        var jwtSecret = Config["Auth:JwtSecret"]!;
+        var token = JwtBearer.CreateToken(opt =>
+        {
+            opt.SigningKey = jwtSecret;
+            opt.User["EmailAddress"] = newUser.Email;
+        });
 
-        await SendOkAsync(ct);
+        await SendOkAsync(token,ct);
     }
 }
