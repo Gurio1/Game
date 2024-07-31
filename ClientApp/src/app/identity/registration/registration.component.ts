@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormGroup,FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
 import { IdentityService } from '../../../services/identity.service';
 import { registerUser } from '../../../contracts/registerUser';
@@ -18,7 +18,7 @@ import { passwordValidator } from '../shared/validators/passwordValidator';
 export class RegistrationComponent {
   email: string = '';
 
-constructor(private identityService : IdentityService,private uniqueEmailValidator : UniqueEmailValidator,){}
+constructor(private identityService : IdentityService,private uniqueEmailValidator : UniqueEmailValidator,private router: Router){}
 
   registerForm = new FormGroup({
     userName: new FormControl('',Validators.pattern(/^[a-zA-Z0-9]*$/)),
@@ -49,11 +49,12 @@ constructor(private identityService : IdentityService,private uniqueEmailValidat
 
         var result = this.identityService.registerUser(user);
 
-        console.log(user);
+        result.subscribe({
+          next: value => this.router.navigate(['/create-character']),
+          error: err => console.error('Observable emitted an error: ' + err)
+        })
 
-        result.subscribe(val =>{
-        console.log(val);
-        });
+
       }
   }
 }
