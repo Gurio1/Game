@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AsyncValidator, AbstractControl, ValidationErrors } from "@angular/forms";
 import { Observable, map, catchError, of } from "rxjs";
-import { IdentityService } from "../../../../services/identity.service"
+import { IdentityService } from "../../services/identity.service"
 
 @Injectable({ providedIn: 'root' })
 export class UniqueEmailValidator implements AsyncValidator {
