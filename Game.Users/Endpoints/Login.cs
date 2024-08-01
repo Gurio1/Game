@@ -37,6 +37,6 @@ public class Login(UserManager<ApplicationUser> userManager) : Endpoint<LoginReq
             opt.User["EmailAddress"] = user.Email!;
         });
 
-        await SendAsync(token, cancellation: ct);
+        await SendAsync(new {token = token}, cancellation: ct);
     }
 }
