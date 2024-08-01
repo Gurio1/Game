@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IdentityService } from '../../../services/identity.service';
+import { IdentityService } from '../services/identity.service';
 import { loginUser } from '../../../contracts/loginUser';
 import { passwordValidator } from '../shared/validators/passwordValidator';
 import { NgIf } from '@angular/common';
@@ -36,11 +36,10 @@ constructor(private identityService: IdentityService){}
 
       var result = this.identityService.login(user);
 
-      console.log(user);
-
-      result.subscribe(val =>{
-        console.log(val);
-      });
+      result.subscribe({
+          next: value => console.log("Login successful"),
+          error: err => console.error('Observable emitted an error: ' + err)
+        })
     }
   }
 }

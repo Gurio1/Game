@@ -2,7 +2,7 @@ namespace Game.Characters;
 
 public class Player 
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; } = Guid.Empty;
     
     public string UserName { get; set; }
     

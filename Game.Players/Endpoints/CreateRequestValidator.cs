@@ -7,16 +7,12 @@ namespace Game.Characters.Endpoints;
 
 public class CreateRequestValidator : Validator<CreateRequest>
 {
-    public CreateRequestValidator(PlayersDbContext dbContext)
+    public CreateRequestValidator()
     {
         RuleFor(x => x.UserName)
             .NotEmpty()
             .WithMessage("UserName is required")
             .MinimumLength(4)
-            .WithMessage("UserName cant be less than 4 symbols")
-            .MustAsync(async (userName, ct) =>
-            {
-                return await dbContext.Players.AnyAsync(p => p.UserName != userName);
-            }).WithMessage("This UserName is already taken");
+            .WithMessage("UserName cant be less than 4 symbols");
     }
 }

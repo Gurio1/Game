@@ -13,12 +13,12 @@ public class SetPlayerIdHandler(UserManager<ApplicationUser> userManager) : IReq
 
         if (user is null)
         {
-            return Result.Error($"User with email {request.Email} does not exist");
+            return Result.Invalid(new ValidationError($"User with email {request.Email} does not exist"));
         }
 
         if (user.PlayerId != Guid.Empty)
         {
-            return Result.Error($"User already have a player with id : {user.PlayerId}");
+            return Result.Invalid(new ValidationError($"User already have a player with id : {user.PlayerId}"));
         }
 
         user.PlayerId = request.PlayerId;

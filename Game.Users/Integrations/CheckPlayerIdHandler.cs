@@ -10,9 +10,9 @@ public class CheckPlayerIdHandler(UserManager<ApplicationUser> userManager)
 {
     public Task<Result> Handle(CheckPlayerIdQuery request, CancellationToken cancellationToken)
     {
-        var playerId = userManager.Users.Where(u => u.Email == request.Email).Select(u => u.PlayerId).ToString();
+        var playerId = userManager.Users.Where(u => u.Email == request.Email).Select(u => u.PlayerId).FirstOrDefault();
 
-        return Task.FromResult(playerId is null ? Result.Success() :
+        return Task.FromResult(playerId == Guid.Empty ? Result.Success() :
             Result.Invalid(new ValidationError("This user has already created a player")));
     }
 }

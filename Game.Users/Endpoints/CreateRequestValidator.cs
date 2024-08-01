@@ -6,19 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Game.Users.Endpoints;
 
-public class CreateRequestValidator : AbstractValidator<CreateRequest>
+public class CreateRequestValidator : Validator<CreateRequest>
 {
-    public CreateRequestValidator(UserManager<ApplicationUser> userManager)
+    public CreateRequestValidator()
     {
         RuleFor(x => x.Email)
             .NotEmpty()
             .WithMessage("Email address is required")
             .EmailAddress()
-            .WithMessage("Invalid email")
-            .MustAsync(async (email, ct) =>
-            {
-                return await userManager.Users.AnyAsync(u => u.Email != email);
-            }).WithMessage("This email is already taken");
+            .WithMessage("Invalid email");
 
 
         RuleFor(x => x.Password)

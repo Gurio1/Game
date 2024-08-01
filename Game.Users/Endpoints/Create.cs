@@ -1,6 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Game.Users.Endpoints;
 
@@ -14,8 +15,16 @@ public class Create(UserManager<ApplicationUser> userManager) : Endpoint<CreateR
     
     public override async Task HandleAsync(CreateRequest req, CancellationToken ct)
     {
+        var isEmailNotUnique = await userManager.Users.AnyAsync(u => u.Email == req.Email, cancellationToken: ct);
+
+        if (isEmailNotUnique)
+        {
+            ThrowError(request => request.Email,"This email is already taken");
+        }
+        
         var newUser = new ApplicationUser()
         {
+            UserName = req.Email,
             Email = req.Email,
         };
 
@@ -37,6 +46,6 @@ public class Create(UserManager<ApplicationUser> userManager) : Endpoint<CreateR
             opt.User["EmailAddress"] = newUser.Email;
         });
 
-        await SendOkAsync(token,ct);
+        await SendOkAsync(new {token = token},ct);
     }
 }
