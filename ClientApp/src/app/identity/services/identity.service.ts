@@ -1,12 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
-import { API_URL } from '../constants'
-import { User } from '../models/User';
-import { registerUser } from '../contracts/registerUser';
-import { loginUser } from '../contracts/loginUser';
-import { JWT_TOKEN } from '../constants';
-import { identityTokenResponse } from '../contracts/api-responses/identityTokenResponse';
+import { API_URL } from '../../../constants'
+import { User } from '../../../models/User';
+import { registerUser } from '../../../contracts/registerUser';
+import { loginUser } from '../../../contracts/loginUser';
+import { JWT_TOKEN } from '../../../constants';
+import { identityTokenResponse } from '../../../contracts/api-responses/identityTokenResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +16,21 @@ export class IdentityService {
   constructor(private http: HttpClient) { }
 
   registerUser(user : registerUser) : Observable<identityTokenResponse>{
+    console.log(user);
     return this.http.post<identityTokenResponse>(API_URL + `users`,user)
     .pipe(
         tap((response: identityTokenResponse) => {
           localStorage.setItem(JWT_TOKEN, response.token);
         }),
         catchError(this.handleError)
-      );;
+      );
   }
 
   login(user : loginUser) : Observable<identityTokenResponse>{
     return this.http.post<identityTokenResponse>(API_URL + `users/login`,user)
     .pipe(
         tap((response: identityTokenResponse) => {
+          console.log(response.token)
           localStorage.setItem(JWT_TOKEN, response.token);
         }),
         catchError(this.handleError)
