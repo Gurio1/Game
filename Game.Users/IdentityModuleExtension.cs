@@ -1,4 +1,6 @@
+using FluentValidation;
 using Game.Users.Data;
+using Game.Users.Endpoints;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,18 +18,19 @@ public static class IdentityModuleExtension
         List<System.Reflection.Assembly> mediatRAssemblies)
     {
         string? connectionString = config.GetConnectionString("IdentityConnectionString");
-        services.AddDbContext<IdentityDbContext>(builder =>
+        services.AddDbContext<UsersDbContext>(builder =>
         {
             builder.UseSqlServer(connectionString);
         });
 
         services.AddIdentityCore<ApplicationUser>()
-            .AddEntityFrameworkStores<IdentityDbContext>();
-
+            .AddEntityFrameworkStores<UsersDbContext>();
+        
         services.Configure<IdentityOptions>(options =>
         {
             options.Password.RequireUppercase = false;
             options.Password.RequireLowercase = false;
+            options.User.RequireUniqueEmail = true;
         });
         
         // if using MediatR in this module, add any assemblies that contain handlers to the list
