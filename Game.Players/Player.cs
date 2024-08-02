@@ -19,6 +19,7 @@ public class Player
     
     public Player(string userName,double strength, double endurance)
     {
+        Id = Guid.NewGuid();
         UserName = userName;
         Strength = strength;
         Endurance = endurance;
