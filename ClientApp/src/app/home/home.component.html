@@ -1,0 +1,55 @@
+<div class="background-overlay"></div>
+<div class="container">
+  <header>
+    <h1>Dark Dungeon RPG</h1>
+  </header>
+  <div class="player-info">
+    <div class="avatar-section">
+      <img src="../../assets/avatar.jpeg" alt="Player Avatar" />
+      <p><strong>Name:</strong> Adventurer</p>
+      <p><strong>Class:</strong> Warrior</p>
+      <p><strong>Race:</strong> Human</p>
+      <p><strong>Level:</strong> 10</p>
+    </div>
+    <div class="stats-section">
+      <h2>Stats</h2>
+      <p><strong>Health:</strong> 100/100</p>
+      <p><strong>Mana:</strong> 50/50</p>
+      <p><strong>Strength:</strong> 20</p>
+      <p><strong>Agility:</strong> 15</p>
+      <p><strong>Intelligence:</strong> 10</p>
+    </div>
+    <div class="inventory-section">
+      <h2>Inventory</h2>
+      <ul>
+        <li *ngFor="let item of inventory">
+          <img [src]="item.img" alt="{{ item.name }}" />
+          <span>{{ item.name }}</span>
+          <button (click)="equipItem(item)">Equip</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="equipment-section">
+    <h2>Equipment</h2>
+    <div *ngFor="let slot of equipmentSlots">
+      <div class="equipment-slot">
+        <span>{{ slot.name }}:</span>
+        <img
+          *ngIf="slot.item"
+          [src]="slot.item.img"
+          alt="{{ slot.item.name }}"
+        />
+        <span *ngIf="!slot.item">Empty</span>
+        <button *ngIf="slot.item" (click)="unequipItem(slot)">Unequip</button>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-menu">
+    <ul>
+      <li><a routerLink="/combat">Prepare for Combat</a></li>
+      <li><a routerLink="/shop">Visit the Shop</a></li>
+      <li><a routerLink="/quests">Check Quests</a></li>
+    </ul>
+  </nav>
+</div>
