@@ -40,7 +40,6 @@ public class Create(IMediator mediator,PlayersDbContext dbContext) : Endpoint<Cr
             ThrowIfAnyErrors();
         }
 
-        //TO DO: Set player Id
         var player = new Player(req.UserName, 10, 15);
 
         dbContext.Players.Add(player);
@@ -61,6 +60,7 @@ public class Create(IMediator mediator,PlayersDbContext dbContext) : Endpoint<Cr
         dbContext.Players.Add(player);
         await dbContext.SaveChangesAsync(ct);
         
-        await SendOkAsync(ct);
+        //TO DO: Create ViewModel for this
+        await SendOkAsync(player,ct);
     }
 }
