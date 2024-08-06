@@ -18,8 +18,8 @@ export class CombatComponent {
   ) {}
 
   ngOnInit() {
-    this.combatService.getMonster().subscribe((monster) => {
-      this.monster = monster;
+    this.combatService.getMonster().subscribe((data) => {
+      this.monster = data.monster;
       this.updateHealthPercentage();
     });
   }
@@ -29,6 +29,6 @@ export class CombatComponent {
   }
 
   updateHealthPercentage(): void {
-    this.healthPercentage = (Number(this.monster.currentHp) / Number(this.monster.hp)) * 100;
+    this.healthPercentage = (Number(this.monster.currentHP) / Number(this.monster.hp)) * 100;
   }
 }

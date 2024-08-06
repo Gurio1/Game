@@ -1,3 +1,3 @@
 export class Player{
-    constructor(strenght : number,endurance : number, hp : number, currentHp : number){}
+    constructor(public userName : string,public strength : number,public endurance : number,public hp : number,public currentHP : number){}
 }

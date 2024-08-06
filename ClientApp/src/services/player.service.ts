@@ -18,8 +18,12 @@ export class PlayerService {
 
   constructor(private http: HttpClient) { }
 
-  createPlayer(playerInfo : createPlayer) : Observable<Player> {
-    return this.http.post<Player>(API_URL + 'players', playerInfo,this.createAuthHeaders());
+  createPlayer(playerInfo : createPlayer) {
+    return this.http.post(API_URL + 'players', playerInfo,this.createAuthHeaders());
+  }
+
+  getPlayer() : Observable<Player> {
+    return this.http.get<Player>(API_URL + 'players',this.createAuthHeaders());
   }
 
   isUserNameTaken(userName : string) : Observable<boolean>{

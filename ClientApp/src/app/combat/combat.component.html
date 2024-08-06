@@ -1,16 +1,22 @@
 @if (monster.hp != '0') {
-<div>
-  <div class="health-bar-container">
-    <div class="health-bar" [style.width.%]="healthPercentage"></div>
+<div class="background-overlay"></div>
+<div class="container">
+  <header>
+    <h1>Dark Dungeon RPG - Combat</h1>
+  </header>
+  <div class="combat-area">
+    <div class="monster-info">
+      <img src="../../assets/monster.png" alt="Monster" />
+      <p><strong>Monster Name:</strong> Dark Beast</p>
+      <div class="hp-bar">
+        <div class="hp-fill" [style.width.%]="healthPercentage"></div>
+      </div>
+      <p><strong>HP:</strong> {{ monster.currentHP }}/{{ monster.hp }}</p>
+    </div>
+    <button (click)="attack()">Attack</button>
   </div>
-  <div class="health-info">
-    Monster health: {{ monster.currentHp }} / {{ monster.hp }}
-  </div>
-  <p aria-live="polite">
-    Monster Attack: <strong>{{ monster.damage }}</strong>
-  </p>
-  <button (click)="attack()">Attack</button>
 </div>
+
 } @else {
 <p>Loading...</p>
 }
