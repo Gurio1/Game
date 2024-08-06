@@ -18,13 +18,13 @@ public static class IdentityModuleExtension
         List<System.Reflection.Assembly> mediatRAssemblies)
     {
         string? connectionString = config.GetConnectionString("IdentityConnectionString");
-        services.AddDbContext<UsersDbContext>(builder =>
+        services.AddDbContext<PlayerIdentityDbContext>(builder =>
         {
             builder.UseSqlServer(connectionString);
         });
 
-        services.AddIdentityCore<ApplicationUser>()
-            .AddEntityFrameworkStores<UsersDbContext>();
+        services.AddIdentityCore<PlayerIdentity>()
+            .AddEntityFrameworkStores<PlayerIdentityDbContext>();
         
         services.Configure<IdentityOptions>(options =>
         {

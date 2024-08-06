@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Game.Users.Endpoints;
 
-public class IsEmailUnique(UserManager<ApplicationUser> userManager) : Endpoint<IsEmailUniqueRequest>
+public class IsEmailUnique(UserManager<PlayerIdentity> userManager) : Endpoint<IsEmailUniqueRequest>
 {
     
     public override void Configure()

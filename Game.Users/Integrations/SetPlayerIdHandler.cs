@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Game.Users.Integrations;
 
-public class SetPlayerIdHandler(UserManager<ApplicationUser> userManager) : IRequestHandler<SetPlayerIdCommand,Result>
+public class SetPlayerIdHandler(UserManager<PlayerIdentity> userManager) : IRequestHandler<SetPlayerIdCommand,Result>
 {
     public async Task<Result> Handle(SetPlayerIdCommand request, CancellationToken cancellationToken)
     {

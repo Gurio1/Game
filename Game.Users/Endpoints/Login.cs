@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Game.Users.Endpoints;
 
-public class Login(UserManager<ApplicationUser> userManager) : Endpoint<LoginRequest>
+public class Login(UserManager<PlayerIdentity> userManager) : Endpoint<LoginRequest>
 {
     public override void Configure()
     {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Game.Users.Integrations;
 
-public class CheckPlayerIdHandler(UserManager<ApplicationUser> userManager)
+public class CheckPlayerIdHandler(UserManager<PlayerIdentity> userManager)
     : IRequestHandler<CheckPlayerIdQuery, Result>
 {
     public Task<Result> Handle(CheckPlayerIdQuery request, CancellationToken cancellationToken)
