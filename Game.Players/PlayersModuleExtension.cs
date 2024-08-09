@@ -1,4 +1,6 @@
+using FluentValidation;
 using Game.Characters.Data;
+using Game.Characters.Endpoints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,8 @@ public static class PlayersModuleExtension
         {
             builder.UseSqlServer(connectionString);
         });
+
+        services.AddScoped<IPlayerRepository, PlayerRepository>();
         
         // if using MediatR in this module, add any assemblies that contain handlers to the list
         mediatRAssemblies.Add(typeof(PlayersModuleExtension).Assembly);
