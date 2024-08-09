@@ -12,11 +12,6 @@
   overflow: hidden;
 }
 
-@font-face {
-  font-family: "MedievalSharp";
-  src: url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
-}
-
 .background-overlay {
   position: absolute;
   top: 0;
