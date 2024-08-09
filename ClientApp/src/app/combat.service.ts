@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Monster } from '../models/Monster';
-import { API_URL } from '../constants'
+import { API_URL, JWT_TOKEN } from '../constants'
 import { Battle } from '../models/Battle';
 
 @Injectable({
@@ -15,7 +15,16 @@ export class CombatService {
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(API_URL + 'combatHub').withAutomaticReconnect()
+      .withUrl(API_URL + 'hub/combat',
+      //TO DO: Find a way to pass the JWT token from headers
+      {
+      withCredentials: true,
+      accessTokenFactory: () => {
+          return localStorage.getItem(JWT_TOKEN)!;
+      },
+      skipNegotiation: true,
+      transport: signalR.HttpTransportType.WebSockets,
+    }).withAutomaticReconnect()
       .build();
 
     this.hubConnection
@@ -34,6 +43,6 @@ export class CombatService {
   }
 
   public Attack(){
-    this.hubConnection?.invoke("Attack","test").then(r => console.log(r));
+    this.hubConnection?.invoke("Attack").then(r => console.log(r));
   }
 }
