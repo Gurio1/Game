@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IdentityService } from '../services/identity.service';
 import { loginUser } from '../../../contracts/loginUser';
 import { passwordValidator } from '../shared/validators/passwordValidator';
@@ -17,7 +17,7 @@ import { NgIf } from '@angular/common';
 })
 export class LoginComponent {
 
-constructor(private identityService: IdentityService){}
+constructor(private identityService: IdentityService,private router: Router){}
 
   loginForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
@@ -37,7 +37,7 @@ constructor(private identityService: IdentityService){}
       var result = this.identityService.login(user);
 
       result.subscribe({
-          next: value => console.log("Login successful"),
+          next: value => this.router.navigate(['/home']),
           error: err => console.error('Observable emitted an error: ' + err)
         })
     }

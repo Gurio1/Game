@@ -15,6 +15,7 @@ import { NgIf } from '@angular/common';
   styleUrl: './create-character.component.css'
 })
 export class CreateCharacterComponent {
+  router: any;
 
   constructor(private uniqueUserNameValidator : uniqueUserNameValidator,private playerService : PlayerService){}
 
@@ -26,7 +27,7 @@ export class CreateCharacterComponent {
       validators:[
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9]*$/),
-        //Validators.minLength(4)
+        Validators.minLength(4)
       ],
       updateOn: 'blur'
     })
@@ -41,12 +42,10 @@ export class CreateCharacterComponent {
           this.createForm.controls.userName.value!
         );
 
-        console.log(player);
-
         var result = this.playerService.createPlayer(player);
 
         result.subscribe({
-          next: value => console.log(value),
+          next: value => this.router.navigate(['/home']),
           error: err => console.error('Observable emitted an error: ' + err)
         })
       }
