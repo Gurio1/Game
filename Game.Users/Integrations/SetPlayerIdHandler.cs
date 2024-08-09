@@ -2,13 +2,16 @@ using Ardalis.Result;
 using Game.Users.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 namespace Game.Users.Integrations;
 
-public class SetPlayerIdHandler(UserManager<PlayerIdentity> userManager) : IRequestHandler<SetPlayerIdCommand,Result>
+public class SetPlayerIdHandler(UserManager<PlayerIdentity> userManager,ILogger logger) : IRequestHandler<SetPlayerIdCommand,Result>
 {
     public async Task<Result> Handle(SetPlayerIdCommand request, CancellationToken cancellationToken)
     {
+        logger.Information("Setting player id  - {id} to the user with email - {email}",
+            request.PlayerId,request.Email);
         var user = await userManager.FindByEmailAsync(request.Email);
 
         if (user is null)
