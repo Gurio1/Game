@@ -2,12 +2,14 @@ namespace Game.Combat;
 
 public class Battle
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Monster Monster { get; set; }
+    public Player Player { get; set; }    
 
-    public Battle(Monster monster)
+    public Battle(Monster monster,Player player)
     {
         Monster = monster;
+        Player = player;
     }
 }

@@ -3,6 +3,8 @@ namespace Game.Characters;
 public class Player 
 {
     public Guid Id { get; set; } = Guid.Empty;
+
+    public Guid BattleId { get; set; } = Guid.Empty;
     
     public string UserName { get; set; }
     
@@ -17,9 +19,9 @@ public class Player
         //for ef core
     }
     
-    public Player(string userName,double strength, double endurance)
+    public Player(Guid id,string userName,double strength, double endurance)
     {
-        Id = Guid.NewGuid();
+        Id = id;
         UserName = userName;
         Strength = strength;
         Endurance = endurance;
